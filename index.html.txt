@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clean Water & Sanitation Chatbot</title>
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #e6f7ff;
+            text-align: center;
+        }
+        #chatbox {
+            width: 90%;
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            height: 400px;
+            overflow-y: auto;
+            border: 2px solid #0077b6;
+        }
+        #userInput {
+            width: 70%;
+            padding: 10px;
+        }
+        button {
+            padding: 10px;
+            background: #0077b6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .bot { color: green; text-align: left; }
+        .user { color: blue; text-align: right; }
+    </style>
+</head>
+
+<body>
+
+<h2>💧 Clean Water & Sanitation Chatbot 💧</h2>
+
+<div id="chatbox"></div>
+
+<input id="userInput" type="text" placeholder="Type here..." />
+<button onclick="sendMessage()">Send</button>
+
+<script>
+const responses = {
+    "hi": "Hello! 😊 How can I help you save water today?",
+    "hello": "Hi there! 💧 Ask me about clean water.",
+    "how are you": "I am fine and happy to help you save water!",
+    "bye": "Goodbye! Remember to save water 💙",
+
+    // Water & Sanitation Questions (200)
+    "what is water": "Water is life. We need it to drink and live.",
+    "why save water": "Saving water helps people, animals, and plants.",
+    "how to save water": "Turn off taps and use less water.",
+    "what is sanitation": "Sanitation means keeping places clean and healthy.",
+    "why is clean water important": "Clean water keeps us healthy.",
+     const responses = {
+  "hi": "Hello! 😊",
+  "hello": "Hi there!",
+  "how are you": "I am fine!",
+  "bye": "Goodbye! Save water 💧",
+
+  // 1–20
+  "what is water": "Water is life.",
+  "why is water important": "Water keeps us alive.",
+  "why save water": "Water is limited.",
+  "how to save water": "Turn off taps.",
+  "what is clean water": "Water safe to drink.",
+  "what is sanitation": "Keeping surroundings clean.",
+  "why sanitation is important": "It prevents diseases.",
+  "what is drinking water": "Water we drink.",
+  "what causes water pollution": "Waste and chemicals.",
+  "how to stop water pollution": "Do not throw waste.",
+  "what is rainwater harvesting": "Collecting rainwater.",
+  "why harvest rainwater": "To save water.",
+  "what is wastewater": "Used dirty water.",
+  "how to reuse water": "Use for plants.",
+  "what is hygiene": "Keeping clean.",
+  "why wash hands": "Stops germs.",
+  "what is sewage": "Dirty water waste.",
+  "why toilets are important": "For cleanliness.",
+  "what is groundwater": "Water under land.",
+  "how groundwater is polluted": "Chemicals and waste.",
+
+  // 21–50
+  "how to save water at home": "Close taps properly.",
+  "how to save water in school": "Use water carefully.",
+  "how to save water in bathroom": "Short showers.",
+  "what is water scarcity": "Lack of water.",
+  "why water scarcity happens": "Overuse of water.",
+  "what is water conservation": "Saving water.",
+  "how can kids save water": "Do not waste.",
+  "what is clean environment": "Pollution free place.",
+  "what is open defecation": "Using open places.",
+  "why avoid open defecation": "Causes diseases.",
+  "what are waterborne diseases": "Diseases from water.",
+  "name a waterborne disease": "Cholera.",
+  "what is filtration": "Cleaning water.",
+  "what is boiling water": "Killing germs.",
+  "why boil water": "Make it safe.",
+  "what is hand pump": "Groundwater tool.",
+  "what is tap water": "Water from pipes.",
+  "how to keep water clean": "Cover containers.",
+  "what is plastic pollution": "Plastic waste.",
+  "why avoid plastic": "Pollutes water.",
+
+  // 51–100
+  "what is soap": "Cleans hands.",
+  "why use soap": "Kills germs.",
+  "what is sanitation system": "Waste management.",
+  "what is drainage": "Water flow path.",
+  "why drainage is needed": "Avoid flooding.",
+  "what is river pollution": "Dirty rivers.",
+  "how to save rivers": "Do not pollute.",
+  "what is lake pollution": "Dirty lakes.",
+  "why clean lakes": "For water life.",
+  "what is water cycle": "Movement of water.",
+  "what is evaporation": "Water turns vapor.",
+  "what is condensation": "Cloud formation.",
+  "what is precipitation": "Rainfall.",
+  "what is reuse": "Use again.",
+  "what is recycle": "Process waste.",
+  "what is reduce": "Use less.",
+  "what are 3Rs": "Reduce Reuse Recycle.",
+  "why fix leaks": "Saves water.",
+  "what is leak": "Water loss.",
+  "what is tap leakage": "Dripping tap.",
+  "why close tap": "Avoid waste.",
+  "what is bucket bath": "Uses less water.",
+  "what is shower bath": "Uses more water.",
+  "what is clean toilet": "Hygienic toilet.",
+  "why clean toilet": "Stops diseases.",
+  "what is soap water": "Water with soap.",
+  "why wash vegetables": "Remove dirt.",
+  "what is safe water": "Germ free water.",
+  "what is unsafe water": "Dirty water.",
+  "why drink safe water": "Stay healthy.",
+
+  // 101–150
+  "what is water tank": "Stores water.",
+  "why cover water tank": "Stop insects.",
+  "what is mosquito breeding": "In dirty water.",
+  "how to stop mosquitoes": "No stagnant water.",
+  "what is stagnant water": "Still water.",
+  "why stagnant water bad": "Breeds mosquitoes.",
+  "what is sanitation worker": "Cleans waste.",
+  "why respect sanitation workers": "They protect health.",
+  "what is handwashing": "Cleaning hands.",
+  "when wash hands": "Before eating.",
+  "what is soap handwash": "Better cleaning.",
+  "what is water footprint": "Water usage.",
+  "why save every drop": "Water is precious.",
+  "what is village sanitation": "Clean village.",
+  "what is city sanitation": "Urban cleanliness.",
+  "what is pipe water": "Water supply.",
+  "why pipe water clean": "Filtered water.",
+  "what is filter": "Cleans water.",
+  "what is RO filter": "Purifies water.",
+  "why use filter": "Remove germs.",
+  "what is water tank cleaning": "Remove dirt.",
+  "how often clean tank": "Every 6 months.",
+  "what is drinking water source": "River well tap.",
+  "what is well": "Groundwater source.",
+  "what is pond": "Small water body.",
+  "why ponds dirty": "Waste dumping.",
+  "how clean ponds": "Stop waste.",
+  "what is flood": "Too much water.",
+  "why flood dangerous": "Causes damage.",
+  "what is drought": "No water.",
+
+  // 151–200
+  "why drought happens": "No rain.",
+  "how save water in drought": "Use less.",
+  "what is rain": "Water from clouds.",
+  "why rain important": "Fills rivers.",
+  "what is cloud": "Water vapor.",
+  "what is sanitation awareness": "Learning cleanliness.",
+  "why teach sanitation": "Healthy life.",
+  "what is clean hands habit": "Wash regularly.",
+  "what is toilet hygiene": "Clean toilet use.",
+  "why flush properly": "Avoid smell.",
+  "what is water tank overflow": "Water waste.",
+  "how stop overflow": "Turn off motor.",
+  "what is motor water pump": "Pumps water.",
+  "why switch off motor": "Save water.",
+  "what is school sanitation": "Clean school.",
+  "why clean school toilets": "Student health.",
+  "what is public toilet": "Shared toilet.",
+  "why keep public toilets clean": "Public health.",
+  "what is water safety": "Safe usage.",
+  "why water safety important": "Prevents illness.",
+  "what is clean india mission": "Cleanliness drive.",
+  "what is swachh bharat": "Clean India.",
+  "why cleanliness important": "Good health.",
+  "what is hand hygiene": "Clean hands.",
+  "why hygiene matters": "Stops diseases.",
+  "what is water education": "Learning water care.",
+  "why teach kids water saving": "Future safety.",
+  "what is water awareness": "Understanding water.",
+  "why protect water": "Life depends on it.",
+  "final message": "Save water, save life 💧"
+};
+const responses = {
+  "hi": "Hello! 😊",
+  "hello": "Hi there!",
+  "how are you": "I am fine!",
+  "bye": "Goodbye! Save water 💧",
+
+  // 1–20
+  "what is water": "Water is life.",
+  "why is water important": "Water keeps us alive.",
+  "why save water": "Water is limited.",
+  "how to save water": "Turn off taps.",
+  "what is clean water": "Water safe to drink.",
+  "what is sanitation": "Keeping surroundings clean.",
+  "why sanitation is important": "It prevents diseases.",
+  "what is drinking water": "Water we drink.",
+  "what causes water pollution": "Waste and chemicals.",
+  "how to stop water pollution": "Do not throw waste.",
+  "what is rainwater harvesting": "Collecting rainwater.",
+  "why harvest rainwater": "To save water.",
+  "what is wastewater": "Used dirty water.",
+  "how to reuse water": "Use for plants.",
+  "what is hygiene": "Keeping clean.",
+  "why wash hands": "Stops germs.",
+  "what is sewage": "Dirty water waste.",
+  "why toilets are important": "For cleanliness.",
+  "what is groundwater": "Water under land.",
+  "how groundwater is polluted": "Chemicals and waste.",
+
+  // 21–50
+  "how to save water at home": "Close taps properly.",
+  "how to save water in school": "Use water carefully.",
+  "how to save water in bathroom": "Short showers.",
+  "what is water scarcity": "Lack of water.",
+  "why water scarcity happens": "Overuse of water.",
+  "what is water conservation": "Saving water.",
+  "how can kids save water": "Do not waste.",
+  "what is clean environment": "Pollution free place.",
+  "what is open defecation": "Using open places.",
+  "why avoid open defecation": "Causes diseases.",
+  "what are waterborne diseases": "Diseases from water.",
+  "name a waterborne disease": "Cholera.",
+  "what is filtration": "Cleaning water.",
+  "what is boiling water": "Killing germs.",
+  "why boil water": "Make it safe.",
+  "what is hand pump": "Groundwater tool.",
+  "what is tap water": "Water from pipes.",
+  "how to keep water clean": "Cover containers.",
+  "what is plastic pollution": "Plastic waste.",
+  "why avoid plastic": "Pollutes water.",
+
+  // 51–100
+  "what is soap": "Cleans hands.",
+  "why use soap": "Kills germs.",
+  "what is sanitation system": "Waste management.",
+  "what is drainage": "Water flow path.",
+  "why drainage is needed": "Avoid flooding.",
+  "what is river pollution": "Dirty rivers.",
+  "how to save rivers": "Do not pollute.",
+  "what is lake pollution": "Dirty lakes.",
+  "why clean lakes": "For water life.",
+  "what is water cycle": "Movement of water.",
+  "what is evaporation": "Water turns vapor.",
+  "what is condensation": "Cloud formation.",
+  "what is precipitation": "Rainfall.",
+  "what is reuse": "Use again.",
+  "what is recycle": "Process waste.",
+  "what is reduce": "Use less.",
+  "what are 3Rs": "Reduce Reuse Recycle.",
+  "why fix leaks": "Saves water.",
+  "what is leak": "Water loss.",
+  "what is tap leakage": "Dripping tap.",
+  "why close tap": "Avoid waste.",
+  "what is bucket bath": "Uses less water.",
+  "what is shower bath": "Uses more water.",
+  "what is clean toilet": "Hygienic toilet.",
+  "why clean toilet": "Stops diseases.",
+  "what is soap water": "Water with soap.",
+  "why wash vegetables": "Remove dirt.",
+  "what is safe water": "Germ free water.",
+  "what is unsafe water": "Dirty water.",
+  "why drink safe water": "Stay healthy.",
+
+  // 101–150
+  "what is water tank": "Stores water.",
+  "why cover water tank": "Stop insects.",
+  "what is mosquito breeding": "In dirty water.",
+  "how to stop mosquitoes": "No stagnant water.",
+  "what is stagnant water": "Still water.",
+  "why stagnant water bad": "Breeds mosquitoes.",
+  "what is sanitation worker": "Cleans waste.",
+  "why respect sanitation workers": "They protect health.",
+  "what is handwashing": "Cleaning hands.",
+  "when wash hands": "Before eating.",
+  "what is soap handwash": "Better cleaning.",
+  "what is water footprint": "Water usage.",
+  "why save every drop": "Water is precious.",
+  "what is village sanitation": "Clean village.",
+  "what is city sanitation": "Urban cleanliness.",
+  "what is pipe water": "Water supply.",
+  "why pipe water clean": "Filtered water.",
+  "what is filter": "Cleans water.",
+  "what is RO filter": "Purifies water.",
+  "why use filter": "Remove germs.",
+  "what is water tank cleaning": "Remove dirt.",
+  "how often clean tank": "Every 6 months.",
+  "what is drinking water source": "River well tap.",
+  "what is well": "Groundwater source.",
+  "what is pond": "Small water body.",
+  "why ponds dirty": "Waste dumping.",
+  "how clean ponds": "Stop waste.",
+  "what is flood": "Too much water.",
+  "why flood dangerous": "Causes damage.",
+  "what is drought": "No water.",
+
+  // 151–200
+  "why drought happens": "No rain.",
+  "how save water in drought": "Use less.",
+  "what is rain": "Water from clouds.",
+  "why rain important": "Fills rivers.",
+  "what is cloud": "Water vapor.",
+  "what is sanitation awareness": "Learning cleanliness.",
+  "why teach sanitation": "Healthy life.",
+  "what is clean hands habit": "Wash regularly.",
+  "what is toilet hygiene": "Clean toilet use.",
+  "why flush properly": "Avoid smell.",
+  "what is water tank overflow": "Water waste.",
+  "how stop overflow": "Turn off motor.",
+  "what is motor water pump": "Pumps water.",
+  "why switch off motor": "Save water.",
+  "what is school sanitation": "Clean school.",
+  "why clean school toilets": "Student health.",
+  "what is public toilet": "Shared toilet.",
+  "why keep public toilets clean": "Public health.",
+  "what is water safety": "Safe usage.",
+  "why water safety important": "Prevents illness.",
+  "what is clean india mission": "Cleanliness drive.",
+  "what is swachh bharat": "Clean India.",
+  "why cleanliness important": "Good health.",
+  "what is hand hygiene": "Clean hands.",
+  "why hygiene matters": "Stops diseases.",
+  "what is water education": "Learning water care.",
+  "why teach kids water saving": "Future safety.",
+  "what is water awareness": "Understanding water.",
+  "why protect water": "Life depends on it.",
+  "final message": "Save water, save life 💧"
+    // Auto-generated style Q&A
+};
+
+for (let i = 1; i <= 195; i++) {
+    responses["water question " + i] = "This is water saving tip number " + i + ". Always use water wisely.";
+}
+
+function sendMessage() {
+    let input = document.getElementById("userInput").value.toLowerCase();
+    let chatbox = document.getElementById("chatbox");
+
+    chatbox.innerHTML += `<p class='user'>You: ${input}</p>`;
+
+    let reply = responses[input] || "Sorry, I don't understand. Please ask about water or sanitation.";
+
+    chatbox.innerHTML += `<p class='bot'>Bot: ${reply}</p>`;
+
+    document.getElementById("userInput").value = "";
+    chatbox.scrollTop = chatbox.scrollHeight;
+}
+</script>
+
+</body>
+</html>
